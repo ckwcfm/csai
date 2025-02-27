@@ -12,11 +12,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { FileIcon, Loader2Icon } from 'lucide-react'
+import { FileIcon, Loader2Icon, SparklesIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { UseFormReturn } from 'react-hook-form'
 import { TSearchPDFToolForm } from '@/types/agentTool'
 import { useState } from 'react'
+import { generateSearchPDFToolDescription } from '@/app/actions/agentTools/generateAgentToolDescription'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 type SearchPDFToolFormProps = {
   onSubmit: (data: TSearchPDFToolForm) => void
@@ -32,6 +35,7 @@ export default function SearchPDFToolForm({
   form,
 }: SearchPDFToolFormProps) {
   const [isDragging, setIsDragging] = useState(false)
+
   return (
     <Form {...form}>
       <form
@@ -64,10 +68,17 @@ export default function SearchPDFToolForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Description <span className='text-red-500'>*</span>
+                <div className='flex items-center justify-between'>
+                  <p>
+                    Description <span className='text-red-500'>*</span>
+                  </p>
+                  <div className='flex items-center gap-2'>
+                    <GenerateDescriptionButton form={form} />
+                  </div>
+                </div>
               </FormLabel>
               <FormControl>
-                <Textarea className='resize-none' {...field} />
+                <Textarea className='resize-none min-h-48' {...field} />
               </FormControl>
               <FormDescription>
                 This is the description of the tool. Please describe what the
@@ -170,5 +181,36 @@ export default function SearchPDFToolForm({
         </Button>
       </form>
     </Form>
+  )
+}
+
+function GenerateDescriptionButton({
+  form,
+}: {
+  form: UseFormReturn<TSearchPDFToolForm>
+}) {
+  const fileIds = form.getValues('files').map((f) => f.id)
+  const { mutate: generateDescription, isPending } = useMutation({
+    mutationFn: generateSearchPDFToolDescription,
+    onSuccess: (data) => {
+      toast.success('Description generated successfully')
+      form.setValue('description', data)
+    },
+    onError: () => {
+      toast.error('Failed to generate description')
+    },
+  })
+  return (
+    <Button
+      type='button'
+      size='icon'
+      onClick={() => generateDescription({ fileIds })}
+    >
+      {isPending ? (
+        <Loader2Icon className='w-4 h-4 animate-spin' />
+      ) : (
+        <SparklesIcon className='w-4 h-4' />
+      )}
+    </Button>
   )
 }

@@ -28,13 +28,13 @@ export async function generatePDFSummary(fileId: number) {
   You are a helpful assistant that summarizes PDFs.
   Summarize the following PDF:
   {docs}
-  in less than 50 words
+  in less than 100 words
   `
   const prompt2 = `
   You are a helpful assistant that describes  PDFs.
   Describe the following PDF:
   {docs}
-  in less than 50 words
+  in less than 100 words
   `
   const prompt = ChatPromptTemplate.fromTemplate(prompt1)
 
@@ -140,11 +140,6 @@ export async function processPDFDocument(fileId: number, pdfUrl: string) {
     }
     // Split PDF into chunks
     const chunks = await splitPDFIntoChunks(pdfUrl)
-    console.log('DEBUG: Split PDF into chunks:', chunks)
-    // Generate embeddings
-    // const embeddings = await generateEmbeddings(chunks)
-    // console.log('DEBUG: Generate embeddings:', embeddings)
-
     // Store in database
     await storeEmbeddings({ fileId, chunks, userId: session.user.id })
     revalidatePath('/files')
