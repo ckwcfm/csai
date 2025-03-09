@@ -1,3 +1,4 @@
+'use server'
 import { db } from '@/lib/db'
 import bcrypt from 'bcrypt'
 
@@ -22,8 +23,8 @@ export const seedFile = async () => {
     data: {
       id: 1,
       userId: 'cm6x8590q00002wnrvpgjrpzc',
-      filename: 'Senior Software Developer - Wenco.pdf',
-      key: 'cm6x8590q00002wnrvpgjrpzc/Senior Software Developer - Wenco.pdf',
+      filename: 'Senior Frontend Developer - Ignition.pdf',
+      key: 'cm6x8590q00002wnrvpgjrpzc/bbb2721c-0bf5-4ee4-b069-c9656606b385_Senior Frontend Developer - Ignition.pdf',
       contentType: 'application/pdf',
     },
   })
@@ -32,8 +33,8 @@ export const seedFile = async () => {
     data: {
       id: 2,
       userId: 'cm6x8590q00002wnrvpgjrpzc',
-      filename: 'Application Developer - SFU.pdf',
-      key: 'cm6x8590q00002wnrvpgjrpzc/Application Developer - SFU.pdf',
+      filename: 'iOS Engineer, Optimized Checkout Suite - Stripe.pdf',
+      key: 'cm6x8590q00002wnrvpgjrpzc/9fe35f01-fb09-4d4a-be99-4fa64cb0c358_iOS Engineer, Optimized Checkout Suite - Stripe.pdf',
       contentType: 'application/pdf',
     },
   })

@@ -4,6 +4,7 @@ import ChatMessageList from './ChatMessageList'
 type ChatPageProps = {
   className?: string
 }
+
 export default function ChatPage({ className }: ChatPageProps) {
   return (
     <div className={cn('flex flex-col h-screen ', className)}>

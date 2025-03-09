@@ -16,9 +16,18 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { useQuery } from '@tanstack/react-query'
+import { getAllowRegisterSettings } from '@/app/actions/appSettings/getAllowRegisterSettings'
 
 export default function SignUpPage() {
   const router = useRouter()
+  const { data: allowRegisterSetting } = useQuery({
+    queryKey: ['app-settings'],
+    queryFn: async () => {
+      const resp = await getAllowRegisterSettings()
+      return resp
+    },
+  })
 
   const form = useForm<SignUp>({
     resolver: zodResolver(SignUpSchema),
@@ -41,6 +50,10 @@ export default function SignUpPage() {
         toast.error(error.message)
       }
     }
+  }
+
+  if (allowRegisterSetting && allowRegisterSetting.value !== 'true') {
+    return <div>Registration is disabled</div>
   }
 
   return (

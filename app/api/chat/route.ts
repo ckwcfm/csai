@@ -1,4 +1,3 @@
-import { openai } from '@ai-sdk/openai'
 import {
   streamText,
   LangChainAdapter,
@@ -79,9 +78,7 @@ const getUserFirstEnabledAgent = async (userId: string) => {
  * @param message - The message to convert.
  * @returns The converted Vercel message.
  */
-export const convertLangChainMessageToVercelMessage = (
-  message: BaseMessage
-) => {
+const convertLangChainMessageToVercelMessage = (message: BaseMessage) => {
   switch (message.getType()) {
     case 'human':
       return { content: message.content, role: 'user' }

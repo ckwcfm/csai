@@ -11,7 +11,7 @@ export const fileContentTypesSchema = z.enum(fileContentTypes)
 export type TFileContentType = z.infer<typeof fileContentTypesSchema>
 
 export const fileSchema = z.object({
-  id: z.number(),
+  id: z.number().optional(),
   filename: z.string(),
   key: z.string(),
   userId: z.string(),

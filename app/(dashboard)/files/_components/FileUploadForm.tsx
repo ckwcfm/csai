@@ -82,7 +82,7 @@ function FileUploadForm() {
     if (file) {
       onSubmit({ file })
     }
-  }, [file])
+  }, [file, onSubmit])
 
   const uploadInputRef = useRef<HTMLInputElement>(null)
 

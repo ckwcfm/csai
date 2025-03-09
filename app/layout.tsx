@@ -7,6 +7,7 @@ import { seedDatabase } from '@/app/seed'
 const inter = Inter({ subsets: ['latin'] })
 
 if (process.env.NODE_ENV === 'development') {
+  console.log('Seeding database')
   seedDatabase()
 }
 

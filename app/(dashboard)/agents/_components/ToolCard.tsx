@@ -27,15 +27,10 @@ function ToolCard({ tool, className }: TToolCardProps) {
     >
       <div className='flex flex-col gap-2'>
         <div className='flex flex-col gap-1'>
-          <div className='flex justify-between items-center'>
-            <h3 className='text-sm font-medium'>{tool.name}</h3>
-            <p className='text-[10px] text-primary-foreground bg-muted-foreground px-2 py-1 rounded-md'>
-              {tool.type}
-            </p>
-          </div>
+          <h3 className='text-sm font-medium'>{tool.name}</h3>
           <p className='text-sm text-muted-foreground'>{tool.description}</p>
         </div>
-        <Separator orientation='horizontal' className='bg-muted-foreground' />
+        <Separator orientation='horizontal' />
         <div className='flex flex-col gap-1 text-xs'>
           {tool.type === 'SEARCH_PDF' &&
             tool.searchPDFTool?.files[0]?.filename && (

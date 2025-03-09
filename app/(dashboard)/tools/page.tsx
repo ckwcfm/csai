@@ -1,4 +1,3 @@
-import { AgentToolRegistry } from '@/lib/agentTools/AgentToolRegistry'
 import { CreatePDFToolCard } from './_components/CreateToolCards'
 import { Separator } from '@/components/ui/separator'
 import { AgentSearchPDFTool, AgentTool, File } from '@prisma/client'

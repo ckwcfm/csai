@@ -1,27 +1,16 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import {
-  EllipsisVerticalIcon,
-  PencilIcon,
-  SearchIcon,
-  TrashIcon,
-} from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { PencilIcon } from 'lucide-react'
 import { Agent, AgentsAgentTools, Model, AgentTool } from '@prisma/client'
 import Link from 'next/link'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { AgentIcon } from '@/components/icons/AgentIcon'
 import DeleteAgentDialog from './DeleteAgentDialog'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
+
 type AgentCardProps = {
   agent: Agent & { model: Model } & {
     agentsAgentTools: (AgentsAgentTools & {

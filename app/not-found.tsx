@@ -10,8 +10,8 @@ function NotFound() {
           Page not found
         </p>
         <p className='text-muted-foreground'>
-          The page you're looking for seems to have gone on vacation without
-          leaving a forwarding address
+          The page you&apos;re looking for seems to have gone on vacation
+          without leaving a forwarding address
         </p>
       </div>
       <div className='mt-4 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-md'>

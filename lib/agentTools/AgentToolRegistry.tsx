@@ -1,7 +1,6 @@
-import { AgentTool, AgentToolType, TAgentToolType } from '@/types/agentTool'
-import { AgentQueryApiTool, AgentReadPDFTool } from './AgentQueryApiTool'
+import { TAgentTool } from '@/types/agentTool'
 
-export const AgentToolRegistry = {
-  QUERY_API: AgentQueryApiTool,
-  PDF: AgentReadPDFTool,
-} satisfies Record<TAgentToolType, AgentTool>
+// export const AgentToolRegistry = {
+//   QUERY_API: AgentQueryApiTool,
+//   PDF: AgentSearchPDFTool,
+// } satisfies Record<TAgentTool['type'], AgentTool>

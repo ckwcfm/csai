@@ -67,12 +67,6 @@ export const AgentSearchPDFTool = ({
           in: fileIds,
         },
       })
-      // return results.map((result) => ({
-      //   // fileId: result.metadata.fileId,
-      //   // userId: result.metadata.userId,
-      //   content: result.pageContent,
-      //   // type: 'text',
-      // }))
       const content = results.map((result) => result.pageContent).join('\n')
       return [content, results]
     },

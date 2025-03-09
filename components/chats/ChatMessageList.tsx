@@ -79,7 +79,9 @@ function AssistantMessageBubble({ message }: AssistantMessageBubbleProps) {
         Assistant
       </p>
       <div className='prose dark:prose-invert w-full max-w-none p-2'>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} children={message.content} />
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {message.content}
+        </ReactMarkdown>
       </div>
     </div>
   )

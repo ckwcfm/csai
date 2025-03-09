@@ -16,7 +16,7 @@ export async function getS3PresignedUrlForUpload(
   }
   // call s3 for presigned url
   const randomId = crypto.randomUUID()
-  const key = `${session.user.id}/${randomId}`
+  const key = `${session.user.id}/${randomId}_${filename}`
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
     Key: key,

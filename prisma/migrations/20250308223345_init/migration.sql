@@ -1,5 +1,13 @@
+CREATE SCHEMA IF NOT EXISTS extensions;
+
 -- CreateExtension
-CREATE EXTENSION IF NOT EXISTS "vector";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA extensions;
+
+-- CreateExtension
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
+
+-- CreateExtension
+CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA extensions;
 
 -- CreateEnum
 CREATE TYPE "AgentToolType" AS ENUM ('SEARCH_PDF');
@@ -100,6 +108,15 @@ CREATE TABLE "AgentTool" (
 );
 
 -- CreateTable
+CREATE TABLE "AgentsAgentTools" (
+    "id" BIGSERIAL NOT NULL,
+    "agentId" INTEGER NOT NULL,
+    "agentToolId" BIGINT NOT NULL,
+
+    CONSTRAINT "AgentsAgentTools_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "AgentSearchPDFTool" (
     "agent_tool_id" BIGINT NOT NULL,
 
@@ -131,6 +148,17 @@ CREATE TABLE "FileEmbedding" (
     "content" TEXT NOT NULL DEFAULT '',
 
     CONSTRAINT "FileEmbedding_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "AppSetting" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "name" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+
+    CONSTRAINT "AppSetting_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -172,6 +200,9 @@ CREATE UNIQUE INDEX "AgentTool_id_key" ON "AgentTool"("id");
 CREATE UNIQUE INDEX "AgentTool_userId_name_key" ON "AgentTool"("userId", "name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "AgentsAgentTools_agentId_agentToolId_key" ON "AgentsAgentTools"("agentId", "agentToolId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "AgentSearchPDFTool_agent_tool_id_key" ON "AgentSearchPDFTool"("agent_tool_id");
 
 -- CreateIndex
@@ -194,6 +225,12 @@ ALTER TABLE "Agent" ADD CONSTRAINT "Agent_modelId_fkey" FOREIGN KEY ("modelId") 
 
 -- AddForeignKey
 ALTER TABLE "Agent" ADD CONSTRAINT "Agent_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AgentsAgentTools" ADD CONSTRAINT "AgentsAgentTools_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "AgentsAgentTools" ADD CONSTRAINT "AgentsAgentTools_agentToolId_fkey" FOREIGN KEY ("agentToolId") REFERENCES "AgentTool"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "AgentSearchPDFTool" ADD CONSTRAINT "AgentSearchPDFTool_agent_tool_id_fkey" FOREIGN KEY ("agent_tool_id") REFERENCES "AgentTool"("id") ON DELETE CASCADE ON UPDATE CASCADE;

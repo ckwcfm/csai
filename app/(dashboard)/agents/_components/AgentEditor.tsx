@@ -141,7 +141,7 @@ function AgentEditor({ agent, models, className }: AgentEditorProps) {
                 </FormControl>
                 <FormDescription>
                   The prompt to use for the agent. This will be used to generate
-                  the agent's response.
+                  the agent&apos;s response.
                 </FormDescription>
               </FormItem>
             )}
@@ -225,9 +225,9 @@ function AgentEditorToolsField({
 }: {
   form: UseFormReturn<TUpdateAgentSchema>
 }) {
-  useEffect(() => {
-    console.log('DEBUG: form.watch("tools")', form.watch('tools'))
-  }, [form.watch('tools')])
+  // useEffect(() => {
+  //   console.log('DEBUG: form.watch("tools")', form.watch('tools'))
+  // }, [form.watch('tools')])
   return (
     <FormField
       control={form.control}

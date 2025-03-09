@@ -1,6 +1,6 @@
+'use server'
 import { db } from '@/lib/db'
 import { SUPPORTED_MODELS } from '@/lib/llm/getLangChainLLm'
-import { Model } from '@prisma/client'
 
 const modelCredits = {
   'gpt-4o': 10,

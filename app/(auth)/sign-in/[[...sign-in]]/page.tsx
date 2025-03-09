@@ -44,10 +44,7 @@ export default function SignInPage() {
     } catch (error) {
       console.log(error)
       if (error instanceof Error) {
-        toast({
-          title: 'Error',
-          description: error.message,
-        })
+        toast.error(error.message)
       }
     }
   }
@@ -119,7 +116,7 @@ export default function SignInPage() {
         </div>
       </div>
       <div className='flex gap-2'>
-        <p className='text-sm text-gray-500'>Don't have an account?</p>
+        <p className='text-sm text-gray-500'>Don&apos;t have an account?</p>
         <Link
           href='/sign-up'
           className='text-sm text-gray-500 hover:text-gray-700 hover:underline hover:underline-offset-4 transition-all duration-300 hover:font-medium'

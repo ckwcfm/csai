@@ -64,7 +64,7 @@ export function AgentModelFormItem({ models }: { models: Model[] }) {
           </FormControl>
           <FormDescription>
             The model to use for the agent, this will be used to generate the
-            agent's response.{' '}
+            agent&apos;s response.{' '}
             {form.getValues('model') && (
               <span className='font-bold px-2 bg-primary/10 rounded'>
                 {getModelCredits(form.getValues('model'))} credits / request
